@@ -70,7 +70,9 @@ public class StoreController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<StoreDto> updateStore(
             @PathVariable Long id,
-            @RequestBody StoreDto storeDto) {
+            @RequestBody StoreDto storeDto)
+    {
+
 
         return ResponseEntity.ok(storeService.updateStore(id, storeDto));
     }

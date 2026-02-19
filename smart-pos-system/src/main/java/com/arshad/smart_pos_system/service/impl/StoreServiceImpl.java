@@ -104,10 +104,15 @@ public class StoreServiceImpl implements StoreService {
         Store store = storeRepository.findById(id)
                 .orElseThrow(() -> new UserException("Store not found"));
 
+        System.out.println("Current User ID: " + currentUser.getId());
+        System.out.println("Store Admin ID: " + store.getStoreAdmin().getId());
+
+
         // 🔥 Ownership validation
-        if (!store.getStoreAdmin().getId().equals(currentUser.getId())) {
+        if (!(store.getStoreAdmin().getId().longValue() == currentUser.getId().longValue())) {
             throw new UserException("You are not allowed to update this store");
         }
+
 
         store.setBrand(storeDto.getBrand());
         store.setDescription(storeDto.getDescription());
